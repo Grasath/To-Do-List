@@ -73,7 +73,7 @@ const findByIdAndDelete = async(id)=>{
 let today = date.getDate();
 app.get("/",(req,res)=>{  
     const findItems = async()=>{
-        const items = await Item.find({}).exec();
+        const items = await Item.find({}).maxTimeMS(20000).exec();
         if (items.length === 0){
             insertDefaultItems().catch(err => console.log(err));
             res.redirect('/');
